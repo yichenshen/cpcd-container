@@ -1,0 +1,23 @@
+[Unit]
+Description=Silabs CPCd Container, for multiprotocol connectivity.
+
+[Container]
+Image=ghcr.io/yichenshen/cpcd-container:latest
+AutoUpdate=registry
+
+AddDevice=/dev/ttyACM0
+
+Volume=/dev/shm:/dev/shm:rw
+
+UserNS=keep-id
+GroupAdd=keep-groups
+
+Environment=CPCD_UART_DEVICE_BAUD=460800
+Secret=cpcd_key
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=180
+
+[Install]
+WantedBy=default.target
