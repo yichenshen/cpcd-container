@@ -28,13 +28,14 @@ RUN ARCH=$(dpkg --print-architecture) && \
     ./multiprotocol-packages/debian-bookworm/deb/cpcd_*_${ARCH}.deb
 
 # CPCd configuration
-COPY ./cpcd.conf /etc/cpcd.conf
+COPY --chmod=666 ./cpcd.conf /etc/cpcd.conf
 
 # Start from root homedir
-WORKDIR /root
+WORKDIR /cpcd
+RUN chmod 777 /cpcd
 
 # Copy the startup script
-COPY ./start.sh /root/start.sh
+COPY --chmod=755 ./start.sh /cpcd/start.sh
 
 # Cleanup
 RUN apt-get remove -y \
@@ -46,4 +47,4 @@ RUN apt-get autoremove -y
 RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/silabs
 
-CMD ["/root/start.sh"]
+CMD ["/cpcd/start.sh"]
