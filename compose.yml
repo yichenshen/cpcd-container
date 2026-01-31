@@ -1,0 +1,14 @@
+services:
+  cpcd:
+    image: ghcr.io/yichenshen/cpcd-container:latest
+    container_name: cpcd
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    volumes:
+      - /dev/shm:/dev/shm:rw
+    environment:
+      CPCD_UART_DEVICE_BAUD: "460800"
+secrets:
+  external_secret:
+    external: true
+    name: cpcd_key
