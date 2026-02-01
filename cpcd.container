@@ -18,6 +18,7 @@ Secret=cpcd_key
 [Service]
 Restart=on-failure
 TimeoutStartSec=180
+ExecStopPost=-/usr/bin/rm -rf /dev/shm/cpcd
 
 [Install]
 WantedBy=default.target
