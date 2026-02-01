@@ -2,7 +2,7 @@
 FROM debian:bookworm-slim
 
 # Setup installation and DOCKER env
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 ENV DOCKER=1
 
 # Update packages
