@@ -18,6 +18,9 @@ Secret=cpcd_key
 [Service]
 Restart=on-failure
 TimeoutStartSec=180
+ExecStartPost=/usr/bin/sleep 3
+ExecStartPost=-/bin/sh -c '/usr/bin/chmod g+w /dev/shm/cpcd/cpcd_0/*'
+ExecStartPost=-/bin/sh -c '/usr/bin/chown cpc:dialout /dev/shm/cpcd/cpcd_0/*'
 ExecStopPost=-/usr/bin/rm -rf /dev/shm/cpcd
 
 [Install]
